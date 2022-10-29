@@ -21,11 +21,13 @@ migrate_working_dir/
 # is commented out by default.
 #.vscode/
 
+#
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins
+
 .flutter-plugins-dependencies
 .packages
 .pub-cache/
@@ -50,3 +52,4 @@ linux
 macos
 windows
 pubspec.lock
+.metadata
