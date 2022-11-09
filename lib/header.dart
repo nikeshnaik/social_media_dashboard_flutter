@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
               ),
               child: Text("Social Media Dashboard"),
             ),
-            SizedBox(height: 4),
+            SizedBox(height: 2),
             DefaultTextStyle(
               style: TextStyle(
                   color: Color.fromRGBO(140, 152, 198, 1),

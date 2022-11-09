@@ -35,7 +35,7 @@ class FollowerTile extends StatelessWidget {
       width: 350,
       height: 216,
       child: Card(
-          elevation: 3,
+          elevation: 7,
           borderOnForeground: true,
           shape: Border(
               top:
