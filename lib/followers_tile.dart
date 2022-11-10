@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class FollowerTile extends StatelessWidget {
-  String username;
-  String follower_count;
-  String social_platform;
-  String today_updates;
+  final String username;
+  final String followerCount;
+  final String socialPlatform;
+  final String todayUpdates;
 
-  FollowerTile(
+  const FollowerTile(
       {super.key,
       required this.username,
-      required this.social_platform,
-      required this.today_updates,
-      required this.follower_count});
+      required this.socialPlatform,
+      required this.todayUpdates,
+      required this.followerCount});
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +36,7 @@ class FollowerTile extends StatelessWidget {
           elevation: 7,
           borderOnForeground: true,
           shape: Border(
-              top:
-                  BorderSide(width: 4, color: cardTopBorder[social_platform]!)),
+              top: BorderSide(width: 4, color: cardTopBorder[socialPlatform]!)),
           child: Container(
               color: const Color.fromRGBO(37, 43, 66, 1),
               padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -52,7 +49,7 @@ class FollowerTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Icon(
-                          mapping[social_platform],
+                          mapping[socialPlatform]!,
                           color: Colors.blue,
                           size: 20,
                         ),
@@ -72,7 +69,7 @@ class FollowerTile extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Text(
-                        follower_count,
+                        followerCount,
                         style: const TextStyle(
                             color: Colors.white,
                             fontStyle: FontStyle.normal,
@@ -100,7 +97,7 @@ class FollowerTile extends StatelessWidget {
                             const Icon(Icons.arrow_drop_up,
                                 size: 20,
                                 color: Color.fromRGBO(30, 181, 137, 1)),
-                            Text("$today_updates Today",
+                            Text("$todayUpdates Today",
                                 style: const TextStyle(
                                     color: Color.fromRGBO(30, 181, 137, 1),
                                     fontSize: 12,

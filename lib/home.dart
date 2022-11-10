@@ -1,8 +1,8 @@
-// ignore_for_file: sort_child_properties_last
-
 import 'package:flutter/material.dart';
 import 'package:social_media_dashboard/followers_tile.dart';
 import 'package:social_media_dashboard/header.dart';
+
+import 'overview_card.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -10,103 +10,160 @@ class Home extends StatelessWidget {
   final List<Map<String, String>> data = [
     {
       "username": "@nathan",
-      "social_platform": "facebook",
-      "follower_count": "1987",
-      "today_updates": "12"
+      "socialPlatform": "facebook",
+      "followerCount": "1987",
+      "todayUpdates": "12"
     },
     {
       "username": "@gregory",
-      "social_platform": "twitter",
-      "follower_count": "1044",
-      "today_updates": "99"
+      "socialPlatform": "twitter",
+      "followerCount": "1044",
+      "todayUpdates": "99"
     },
     {
       "username": "@realnathanf",
-      "social_platform": "instagram",
-      "follower_count": "11k",
-      "today_updates": "1099"
+      "socialPlatform": "instagram",
+      "followerCount": "11k",
+      "todayUpdates": "1099"
     },
     {
       "username": "Nathan F.",
-      "social_platform": "youtube",
-      "follower_count": "8239",
-      "today_updates": "144"
+      "socialPlatform": "youtube",
+      "followerCount": "8239",
+      "todayUpdates": "144"
+    }
+  ];
+
+  final List<Map<String, String>> overviewData = [
+    {
+      "title": "Page Views",
+      "socialPlatform": "facebook",
+      "value": "87",
+      "updates": "3%",
+      "netChange": "positive"
     },
     {
-      "username": "@nathan",
-      "social_platform": "facebook",
-      "follower_count": "1987",
-      "today_updates": "12"
+      "title": "Likes",
+      "socialPlatform": "facebook",
+      "value": "52",
+      "updates": "2%",
+      "netChange": "negative"
     },
     {
-      "username": "@gregory",
-      "social_platform": "twitter",
-      "follower_count": "1044",
-      "today_updates": "99"
+      "title": "Likes",
+      "socialPlatform": "instagram",
+      "value": "5462",
+      "updates": "2257%",
+      "netChange": "positive"
     },
     {
-      "username": "@realnathanf",
-      "social_platform": "instagram",
-      "follower_count": "11k",
-      "today_updates": "1099"
+      "title": "Profile Views",
+      "socialPlatform": "instagram",
+      "value": "52k",
+      "updates": "1375%",
+      "netChange": "positive"
     },
     {
-      "username": "Nathan F.",
-      "social_platform": "youtube",
-      "follower_count": "8239",
-      "today_updates": "144"
+      "title": "Retweets",
+      "socialPlatform": "twitter",
+      "value": "117",
+      "updates": "303%",
+      "netChange": "positive"
+    },
+    {
+      "title": "Likes",
+      "socialPlatform": "twitter",
+      "value": "507",
+      "updates": "553%",
+      "netChange": "positive"
+    },
+    {
+      "title": "Likes",
+      "socialPlatform": "youtube",
+      "value": "107",
+      "updates": "19%",
+      "netChange": "negative"
+    },
+    {
+      "title": "Likes",
+      "socialPlatform": "youtube",
+      "value": "1407",
+      "updates": "12%",
+      "netChange": "negative"
     }
   ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.topLeft,
-      padding: const EdgeInsets.only(left: 10, right: 10, top: 0),
-      child: Column(children: [
-        const Header(),
-        Expanded(
-            child: ListView.builder(
-                primary: false,
-                itemCount: data.length,
-                itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(top: 24),
-                    child: FollowerTile(
-                        username: data[index]["username"]!,
-                        social_platform: data[index]["social_platform"]!,
-                        today_updates: data[index]["today_updates"]!,
-                        follower_count: data[index]["follower_count"]!)))),
-      ]),
-      decoration: const BoxDecoration(
-        color: Color.fromRGBO(32, 34, 47, 1),
-      ),
-    );
+        alignment: Alignment.topLeft,
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 0),
+        decoration: const BoxDecoration(
+          color: Color.fromRGBO(32, 34, 47, 1),
+          // color: Colors.amber),
+        ),
+        child: SingleChildScrollView(
+            child: Column(children: [
+          const Header(),
+          // Todo: How to increase height of COntainer based on listview items, currently the next widget after listview shrinks listview.. wtf
+          // Expanded(
+          //     child: ListView.builder(
+          //         itemCount: data.length,
+          //         itemBuilder: (context, index) => Padding(
+          //             padding: const EdgeInsets.only(top: 24),
+          //             child: FollowerTile(
+          //                 username: data[index]["username"]!,
+          //                 social_platform: data[index]["social_platform"]!,
+          //                 today_updates: data[index]["today_updates"]!,
+          //                 follower_count: data[index]["follower_count"]!)))),
+          ...generateFollowerTiles(),
+          const DefaultTextStyle(
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w700,
+                height: 3),
+            child: Text("Overview - Today"),
+          ),
+
+          ...generateOverviewTiles()
+        ])));
   }
 
-  // List<Widget> generateFollowerTile() {
-  //   List<Widget> tiles = [];
+  List<Widget> generateFollowerTiles() {
+    List<Widget> tiles = [];
 
-  //   for (var element in data) {
-  //     FollowerTile tile = FollowerTile(
-  //         username: element["username"]!,
-  //         social_platform: element["social_platform"]!,
-  //         today_updates: element["today_updates"]!,
-  //         follower_count: element["follower_count"]!);
-  //     Padding paddingOfTile =
-  //         Padding(padding: const EdgeInsets.only(top: 24), child: tile);
-  //     tiles.add(paddingOfTile);
-  //   }
+    for (var element in data) {
+      FollowerTile tile = FollowerTile(
+          username: element["username"]!,
+          socialPlatform: element["socialPlatform"]!,
+          todayUpdates: element["todayUpdates"]!,
+          followerCount: element["followerCount"]!);
+      Padding paddingOfTile =
+          Padding(padding: const EdgeInsets.only(top: 24), child: tile);
+      tiles.add(paddingOfTile);
+    }
 
-  //   return tiles;
-  // }
+    return tiles;
+  }
 
-  // Iterable<Widget> generateIteratingTiles() {
-  //   return data.map((e) => Padding(
-  //       padding: const EdgeInsets.only(top: 24),
-  //       child: FollowerTile(
-  //           username: e["username"]!,
-  //           social_platform: e["social_platform"]!,
-  //           today_updates: e["today_updates"]!,
-  //           follower_count: e["follower_count"]!)));
-  // }
+  List<Widget> generateOverviewTiles() {
+    List<Widget> overviewTiles = [];
+
+    for (var element in overviewData) {
+      Overview tile = Overview(
+          title: element["title"]!,
+          socialPlatform: element["socialPlatform"]!,
+          value: element["value"]!,
+          updates: element["updates"]!,
+          netChange: element["netChange"]!);
+
+      Padding paddingOfTile =
+          Padding(padding: const EdgeInsets.only(top: 16), child: tile);
+
+      overviewTiles.add(paddingOfTile);
+    }
+
+    return overviewTiles;
+  }
 }
